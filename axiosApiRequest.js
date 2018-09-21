@@ -1,6 +1,5 @@
 const axios = require('axios');
-const subscriptionKey = '12e9090417c34b9398c3ce156e5c0dc2';
-
+const { subscriptionKey } = require('secrets');
 
 const getImages = (searchTerm) => {
 

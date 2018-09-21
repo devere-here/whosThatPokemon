@@ -1,4 +1,7 @@
-import * as tf from '@tensorflow/tfjs';
+// import * as tf from '@tensorflow/tfjs';
+// import apiRequest from './axiosApiRequest';
+const  apiRequest = require('./axiosApiRequest');
+
 
 const IMAGE_SIZE = 784;
 const NUM_CLASSES = 10;
@@ -9,7 +12,7 @@ const TRAIN_TEST_RATIO = 5 / 6;
 const NUM_TRAIN_ELEMENTS = Math.floor(TRAIN_TEST_RATIO * NUM_DATASET_ELEMENTS);
 const NUM_TEST_ELEMENTS = NUM_DATASET_ELEMENTS - NUM_TRAIN_ELEMENTS;
 
-export class PokemonData {
+class PokemonData {
   constructor() {
     this.shuffledTrainIndex = 0;
     this.shuffledTestIndex = 0;
@@ -17,20 +20,28 @@ export class PokemonData {
 
   async load() {
 
+    const img = new Image();
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
 
-        // Create shuffled indices into the train/test set for when we select a
-    // random dataset element for training / validation.
-    this.trainIndices = tf.util.createShuffledIndices(NUM_TRAIN_ELEMENTS);
-    this.testIndices = tf.util.createShuffledIndices(NUM_TEST_ELEMENTS);
+    Promise.all([apiRequest('charmander'), apiRequest('squirtle')])
+    .then(res => {
+      console.log('res is', res);
+    })
 
-    // Slice the the images and labels into train and test sets.
-    this.trainImages =
-        this.datasetImages.slice(0, IMAGE_SIZE * NUM_TRAIN_ELEMENTS);
-    this.testImages = this.datasetImages.slice(IMAGE_SIZE * NUM_TRAIN_ELEMENTS);
-    this.trainLabels =
-        this.datasetLabels.slice(0, NUM_CLASSES * NUM_TRAIN_ELEMENTS);
-    this.testLabels =
-        this.datasetLabels.slice(NUM_CLASSES * NUM_TRAIN_ELEMENTS);
+    //     // Create shuffled indices into the train/test set for when we select a
+    // // random dataset element for training / validation.
+    // this.trainIndices = tf.util.createShuffledIndices(NUM_TRAIN_ELEMENTS);
+    // this.testIndices = tf.util.createShuffledIndices(NUM_TEST_ELEMENTS);
+
+    // // Slice the the images and labels into train and test sets.
+    // this.trainImages =
+    //     this.datasetImages.slice(0, IMAGE_SIZE * NUM_TRAIN_ELEMENTS);
+    // this.testImages = this.datasetImages.slice(IMAGE_SIZE * NUM_TRAIN_ELEMENTS);
+    // this.trainLabels =
+    //     this.datasetLabels.slice(0, NUM_CLASSES * NUM_TRAIN_ELEMENTS);
+    // this.testLabels =
+    //     this.datasetLabels.slice(NUM_CLASSES * NUM_TRAIN_ELEMENTS);
   }
 
   nextTrainBatch(batchSize) {
@@ -72,3 +83,6 @@ export class PokemonData {
     return {xs, labels};
   }
 }
+
+const stuff = new PokemonData();
+stuff.load();

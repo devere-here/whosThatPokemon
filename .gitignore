@@ -1,7 +1,10 @@
 # dependencies
 /node_modules
 
-# misc
+# files
+secrets.js
+
+# hidden files
 .npm
 .bash_history
 .DS_Store
