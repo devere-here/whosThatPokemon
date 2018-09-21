@@ -1,0 +1,14 @@
+# dependencies
+/node_modules
+
+# misc
+.npm
+.bash_history
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.config/configstore/update-notifier-npm.json
+
+npm-debug.log*
