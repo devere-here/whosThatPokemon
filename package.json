@@ -13,9 +13,11 @@
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
     "puppeteer": "^1.8.0",
+    "pureimage": "^0.1.6",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
-    "sharp": "^0.20.8"
+    "sharp": "^0.20.8",
+    "shelljs": "^0.8.2"
   },
   "scripts": {
     "watch": "cross-env NODE_ENV=development parcel index.html --no-hmr --open",
